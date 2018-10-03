@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/routeInfoDialog"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<!--    <TextView
+        android:gravity="center_horizontal"
+        android:id="@+id/routeNameText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/routeNameText"/>-->
+
+    <EditText
+        android:gravity="center_horizontal"
+        android:id="@+id/routeNameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/routeNameEditTextHint"/>
+
+<!--
+    <TextView
+        android:gravity="center_horizontal"
+        android:id="@+id/routeNumberText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Route Number"/>
+-->
+
+    <EditText
+        android:gravity="center_horizontal"
+        android:id="@+id/routeNumberEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Route Number"/>
+</LinearLayout>

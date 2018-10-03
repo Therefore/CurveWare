@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RunningRoute">
+
+    <fragment
+        android:id="@+id/map"
+        class="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginEnd="15dp"
+        app:barrierAllowsGoneWidgets="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/degreesTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
+        android:textSize="200sp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@+id/map"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="0°" />
+
+    <TextView
+        android:id="@+id/distanceTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="0.00 Miles"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
+        android:textSize="70sp"
+        app:layout_constraintEnd_toEndOf="@+id/degreesTV"
+        app:layout_constraintStart_toStartOf="@+id/degreesTV"
+        app:layout_constraintTop_toBottomOf="@+id/degreesTV" />
+
+    <TextView
+        android:id="@+id/speedTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Speed"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
+        android:textSize="70sp"
+        app:layout_constraintEnd_toEndOf="@+id/degreesTV"
+        app:layout_constraintStart_toStartOf="@+id/degreesTV"
+        app:layout_constraintTop_toBottomOf="@+id/distanceTV" />
+
+    <TextView
+        android:id="@+id/timeTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Time"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
+        android:textSize="780sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/degreesTV"
+        app:layout_constraintStart_toStartOf="@+id/degreesTV"
+        app:layout_constraintTop_toBottomOf="@+id/speedTV" />
+
+    <Button
+        android:id="@+id/test"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Test"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toTopOf="@+id/pauseB"
+        app:layout_constraintEnd_toEndOf="@+id/map"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/map"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/stopB"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="STOP"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@+id/map"
+        app:layout_constraintEnd_toEndOf="@+id/map"
+        app:layout_constraintStart_toStartOf="@+id/map" />
+
+    <ImageView
+        android:id="@+id/carLeftTurnIV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/degreesTV"
+        app:layout_constraintStart_toEndOf="@+id/degreesTV"
+        app:layout_constraintTop_toTopOf="@+id/degreesTV"
+        app:srcCompat="@drawable/car_with_arrow_left_white" />
+
+    <ImageView
+        android:id="@+id/carRightTurnIV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/degreesTV"
+        app:layout_constraintEnd_toStartOf="@+id/degreesTV"
+        app:layout_constraintTop_toTopOf="@+id/degreesTV"
+        app:srcCompat="@drawable/car_with_arrow_right_white" />
+
+    <TextView
+        android:id="@+id/numberOfPointsTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/pauseB"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Pause"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@+id/stopB"
+        app:layout_constraintEnd_toEndOf="@+id/map"
+        app:layout_constraintStart_toStartOf="@+id/map" />
+
+    <Button
+        android:id="@+id/resetDistanceB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Reset Distance"
+        app:layout_constraintBottom_toBottomOf="@+id/distanceTV"
+        app:layout_constraintDimensionRatio="h,1:1"
+        app:layout_constraintEnd_toStartOf="@+id/distanceTV"
+        app:layout_constraintTop_toTopOf="@+id/distanceTV" />
+
+    <ImageButton
+        android:id="@+id/addSubtractDistanceB"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/arrow_up_thick"
+        app:layout_constraintBottom_toBottomOf="@+id/distanceTV"
+        app:layout_constraintDimensionRatio="h,1:1"
+        app:layout_constraintStart_toEndOf="@+id/distanceTV"
+        app:layout_constraintTop_toTopOf="@+id/distanceTV"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Chronometer
+        android:id="@+id/chronometerC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:gravity="center_horizontal"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="@+id/speedTV"
+        app:layout_constraintStart_toStartOf="@+id/speedTV"
+        app:layout_constraintTop_toBottomOf="@+id/speedTV" />
+
+
+</android.support.constraint.ConstraintLayout>

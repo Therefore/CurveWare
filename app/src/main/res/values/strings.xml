@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">CurveWare</string>
+    <string name="action_settings">Settings</string>
+    <string name="routeNameText">Route Name</string>
+    <string name="routeNameEditText">routeNameEditText</string>
+    <string name="routeNameEditTextHint">Route Name</string>
+    <string name="signin">Sign in/Create Account</string>
+    <string name="title_activity_maps">Map</string>
+</resources>

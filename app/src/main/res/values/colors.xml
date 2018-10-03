@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="greenThreshold">#1b5e20</color>
+    <color name="yellowThreshhold">#e7c324</color>
+    <color name="redThreshold">#bf360c</color>
+    <color name="buttonActive">#7d83ff</color>
+
+</resources>
