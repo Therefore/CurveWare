@@ -13,6 +13,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -35,6 +36,7 @@ import com.google.android.gms.location.DetectedActivity;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LocationListener {
@@ -42,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     //Permissions
     private static final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL = 0;
     private static final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 0;
+    private static final int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
+    private static final String TAG = "permissions";
 
     //Location Services
     private LocationManager locationManager;
@@ -58,12 +62,13 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         final Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        requestPermissions();
+
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         // Define the criteria how to select the location provider -> use default
         Criteria criteria = new Criteria();
         provider = locationManager.getBestProvider(criteria, false);
-        @SuppressLint("MissingPermission") Location location = locationManager.getLastKnownLocation(provider);
-
+        //Location location = locationManager.getLastKnownLocation(provider);
         //init UI
 
 
@@ -118,7 +123,13 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             }
         });
 
-        //WRITE EXTERNAL
+/*        int ALL_PERMISSIONS = 101;
+
+        final String[] permissions = new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+
+        ActivityCompat.requestPermissions(this, permissions, ALL_PERMISSIONS);*/
+
+        /*//WRITE EXTERNAL
         // Here, thisActivity is the current activity
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -172,10 +183,51 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         } else {
             // Permission has already been granted
             // Get the location manager
-        }
+        }*/
     }
 
-    //PERMISSION RESPONSES:
+/*    private void insertDummyContactWrapper() {
+        List<String> permissionsNeeded = new ArrayList<String>();
+
+        final List<String> permissionsList = new ArrayList<String>();
+        if (!addPermission(permissionsList, Manifest.permission.ACCESS_FINE_LOCATION))
+            permissionsNeeded.add("GPS");
+        if (!addPermission(permissionsList, Manifest.permission.WRITE_EXTERNAL_STORAGE))
+            permissionsNeeded.add("Read Contacts");
+
+        if (permissionsList.size() > 0) {
+            if (permissionsNeeded.size() > 0) {
+                // Need Rationale
+                String message = "You need to grant access to " + permissionsNeeded.get(0);
+                for (int i = 1; i < permissionsNeeded.size(); i++)
+                    message = message + ", " + permissionsNeeded.get(i);
+                showMessageOKCancel(message,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                requestPermissions(permissionsList.toArray(new String[permissionsList.size()]),
+                                        REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS);
+                            }
+                        });
+                return;
+            }
+            requestPermissions(permissionsList.toArray(new String[permissionsList.size()]),
+                    REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS);
+            return;
+        }
+    }*/
+
+    private boolean addPermission(List<String> permissionsList, String permission) {
+        if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
+            permissionsList.add(permission);
+            // Check for Rationale Option
+            if (!shouldShowRequestPermissionRationale(permission))
+                return false;
+        }
+        return true;
+    }
+
+   /* //PERMISSION RESPONSES:
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
@@ -218,7 +270,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             // other 'case' lines to check for other
             // permissions this app might request.
         }
-    }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -247,7 +299,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     @Override
     protected void onResume() {
         super.onResume();
-        
         locationManager.requestLocationUpdates(provider, 1, 1, this);
     }
 
@@ -271,8 +322,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     }
 
 
-
-
     @Override
     public void onStatusChanged(String s, int i, Bundle bundle) {
 
@@ -290,5 +339,53 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     public void shortToast(String message){
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
+    }
+
+    public  boolean requestPermissions() {
+        if (Build.VERSION.SDK_INT >= 23) {
+
+            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED) {
+                Log.v(TAG,"Permission is granted");
+                return true;
+            } else {
+
+                Log.v(TAG,"Permission is revoked");
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                return false;
+            }
+        }
+        else { //permission is automatically granted on sdk<23 upon installation
+            Log.v(TAG,"Permission is granted");
+            return true;
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 0:
+                boolean isPerpermissionForAllGranted = false;
+                if (grantResults.length > 0 && permissions.length==grantResults.length) {
+                    for (int i = 0; i < permissions.length; i++){
+                        if (grantResults[i] == PackageManager.PERMISSION_GRANTED){
+                            isPerpermissionForAllGranted=true;
+                        }else{
+                            isPerpermissionForAllGranted=false;
+                        }
+                    }
+                    Log.e("value", "Permission Granted, Now you can use local drive .");
+                } else {
+                    isPerpermissionForAllGranted=true;
+                    Log.e("value", "Permission Denied, You cannot use local drive .");
+                }
+                if(isPerpermissionForAllGranted){
+
+                }
+                break;
+        }
     }
 }
