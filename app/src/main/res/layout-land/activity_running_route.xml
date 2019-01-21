@@ -1,19 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RunningRoute">
 
+    <!--    <TextureView
+            android:id="@+id/textureview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />-->
+
+    <!--    <com.camerakit.CameraKitView
+            android:id="@+id/camera"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:keepScreenOn="true"
+            app:camera_flash="auto"
+            app:camera_facing="back"
+            app:camera_focus="continuous"
+            app:camera_permissions="camera"/>-->
 
     <fragment
         android:id="@+id/map"
         class="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginBottom="15dp"
-        android:layout_marginEnd="15dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
         app:barrierAllowsGoneWidgets="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -22,45 +37,37 @@
         android:id="@+id/degreesTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_alignBottom="@id/ballbanklayout"
         android:text="TextView"
+        android:textAlignment="viewStart"
         android:textColor="@color/common_google_signin_btn_text_dark_default"
-        android:textSize="200sp"
+        android:textSize="130sp"
         android:visibility="visible"
-        app:layout_constraintEnd_toStartOf="@+id/map"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         tools:text="0°" />
 
     <TextView
         android:id="@+id/distanceTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Distance"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/ballbanklayout"
+        android:layout_marginTop="15dp"
+        android:text="0.00 mi"
         android:textColor="@color/common_google_signin_btn_text_dark_default"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="@+id/degreesTV"
-        app:layout_constraintStart_toStartOf="@+id/degreesTV"
-        app:layout_constraintTop_toBottomOf="@+id/degreesTV" />
+        android:textSize="40sp"
+        android:visibility="visible" />
 
     <TextView
+        android:layout_marginTop="15dp"
         android:id="@+id/speedTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Speed"
+        android:layout_below="@+id/distanceTV"
+        android:layout_centerHorizontal="true"
+        android:text="00 mph"
         android:textColor="@color/common_google_signin_btn_text_dark_default"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="@+id/degreesTV"
-        app:layout_constraintStart_toStartOf="@+id/degreesTV"
-        app:layout_constraintTop_toBottomOf="@+id/distanceTV" />
+        android:textSize="40sp"
+        android:visibility="visible" />
 
     <TextView
         android:id="@+id/timeTV"
@@ -79,63 +86,33 @@
 
     <Button
         android:id="@+id/test"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/numberOfPointsTV"
         android:text="Test"
-        android:textSize="50sp"
-        app:layout_constraintBottom_toTopOf="@+id/pauseB"
-        app:layout_constraintEnd_toEndOf="@+id/map"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/map"
-        android:visibility="gone"/>
+        android:textSize="10sp"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/stopB"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
         android:text="STOP"
-        android:textSize="40sp"
-        app:layout_constraintBottom_toTopOf="@+id/map"
-        app:layout_constraintEnd_toEndOf="@+id/map"
-        app:layout_constraintStart_toStartOf="@+id/map" />
-
-    <ImageView
-        android:id="@+id/carLeftTurnIV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/degreesTV"
-        app:layout_constraintStart_toEndOf="@+id/degreesTV"
-        app:layout_constraintTop_toTopOf="@+id/degreesTV"
-        app:srcCompat="@drawable/car_with_arrow_left_white" />
-
-    <ImageView
-        android:id="@+id/carRightTurnIV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/degreesTV"
-        app:layout_constraintEnd_toStartOf="@+id/degreesTV"
-        app:layout_constraintTop_toTopOf="@+id/degreesTV"
-        app:srcCompat="@drawable/car_with_arrow_right_white" />
+        android:textSize="60sp" />
 
     <TextView
         android:id="@+id/numberOfPointsTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
         android:text="TextView"
         android:textColor="@color/common_google_signin_btn_text_dark_default"
         android:textSize="20sp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -143,36 +120,108 @@
         android:id="@+id/pauseB"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:text="Pause"
-        android:textSize="40sp"
-        app:layout_constraintBottom_toTopOf="@+id/stopB"
-        app:layout_constraintEnd_toEndOf="@+id/map"
-        app:layout_constraintStart_toStartOf="@+id/map" />
+        android:textSize="20sp"
+        android:visibility="gone" />
 
-    <Button
+    <ImageButton
         android:id="@+id/resetDistanceB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
-        android:text="Reset Distance"
-        app:layout_constraintBottom_toBottomOf="@+id/distanceTV"
-        app:layout_constraintStart_toEndOf="@+id/distanceTV"
-        app:layout_constraintTop_toTopOf="@+id/distanceTV" />
+        android:layout_alignBottom="@+id/distanceTV"
+        android:layout_toStartOf="@+id/distanceTV"
+        android:background="@null"
+        android:scaleY="1.2"
+        android:scaleX="1.2"
+        android:src="@drawable/replay" />
 
     <Chronometer
+        android:layout_marginTop="15dp"
         android:id="@+id/chronometerC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_below="@+id/speedTV"
+        android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
         android:textColor="@color/common_google_signin_btn_text_dark_default"
         android:textSize="40sp"
-        app:layout_constraintEnd_toEndOf="@+id/speedTV"
-        app:layout_constraintStart_toStartOf="@+id/speedTV"
-        app:layout_constraintTop_toBottomOf="@+id/speedTV" />
+        android:visibility="visible" />
 
 
-</android.support.constraint.ConstraintLayout>
+    <ImageButton
+        android:id="@+id/addSubtractDistanceB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleY="1.5"
+        android:scaleX="1.5"
+        android:layout_toEndOf="@id/distanceTV"
+        android:layout_alignBottom="@id/distanceTV"
+        android:layout_marginBottom="7dp"
+        android:layout_marginLeft="10dp"
+        android:background="@null"
+        android:src="@drawable/arrow_up_thick_white" />
+
+    <Button
+        android:id="@+id/testB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="43dp"
+        android:text="Create Text File"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/map"
+        app:layout_constraintEnd_toEndOf="@+id/map"
+        app:layout_constraintStart_toStartOf="@+id/map" />
+
+    <RelativeLayout
+        android:layout_marginTop="20dp"
+        android:id="@+id/ballbanklayout"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true">
+
+        <ImageView
+            android:id="@+id/background"
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+            android:src="@drawable/background" />
+
+        <ImageView
+            android:id="@+id/redBall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="62dp"
+            android:scaleType="center"
+            android:scaleX=".60"
+            android:scaleY=".60"
+            android:src="@drawable/ball" />
+
+        <ImageView
+            android:id="@+id/ballbankcase"
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ballbankcase" />
+    </RelativeLayout>
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/test"
+        android:layout_marginEnd="41dp"
+        android:max="10"
+        android:min="1"
+        app:layout_constraintBottom_toTopOf="@+id/testB"
+        app:layout_constraintEnd_toEndOf="@+id/testB"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/testB" />
+
+
+</RelativeLayout>

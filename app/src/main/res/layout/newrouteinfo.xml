@@ -31,11 +31,12 @@
 -->
 
     <EditText
-        android:gravity="center_horizontal"
         android:id="@+id/routeNumberEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:autoText="false"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Route Number"/>
+        android:gravity="center_horizontal"
+        android:hint="Route Number"
+        android:inputType="number" />
 </LinearLayout>
